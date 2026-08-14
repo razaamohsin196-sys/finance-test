@@ -1,0 +1,271 @@
+{
+ "actions": [],
+ "autoname": "format:AICL-{YYYY}-{######}",
+ "creation": "2026-08-14 09:00:00.000000",
+ "description": "Append-only record of what the AI proposed and what the human decided.",
+ "doctype": "DocType",
+ "editable_grid": 0,
+ "engine": "InnoDB",
+ "field_order": [
+  "link_section",
+  "transaction",
+  "company",
+  "column_break_link",
+  "decided_at",
+  "decided_by",
+  "proposal_section",
+  "source",
+  "proposed_account",
+  "proposed_account_key",
+  "column_break_proposal",
+  "confidence",
+  "tier",
+  "model",
+  "prompt_version",
+  "reasoning_section",
+  "rationale",
+  "review_reason",
+  "raw_response",
+  "second_opinion_section",
+  "shadow_account",
+  "shadow_account_key",
+  "column_break_shadow",
+  "shadow_confidence",
+  "model_disagreed",
+  "shadow_rationale",
+  "outcome_section",
+  "human_decision",
+  "final_account",
+  "column_break_outcome",
+  "was_overridden",
+  "journal_entry"
+ ],
+ "fields": [
+  {
+   "fieldname": "link_section",
+   "fieldtype": "Section Break",
+   "label": "Transaction"
+  },
+  {
+   "fieldname": "transaction",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Staged Bank Transaction",
+   "options": "Staged Bank Transaction",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "column_break_link",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "decided_at",
+   "fieldtype": "Datetime",
+   "label": "Human Decided At"
+  },
+  {
+   "fieldname": "decided_by",
+   "fieldtype": "Link",
+   "label": "Decided By",
+   "options": "User"
+  },
+  {
+   "fieldname": "proposal_section",
+   "fieldtype": "Section Break",
+   "label": "What The AI Proposed"
+  },
+  {
+   "fieldname": "source",
+   "fieldtype": "Select",
+   "label": "Proposed By",
+   "options": "rule\nllm\nfallback"
+  },
+  {
+   "fieldname": "proposed_account",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Proposed Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "proposed_account_key",
+   "fieldtype": "Data",
+   "label": "Proposed Account Key"
+  },
+  {
+   "fieldname": "column_break_proposal",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "confidence",
+   "fieldtype": "Float",
+   "label": "Confidence",
+   "precision": "2"
+  },
+  {
+   "fieldname": "tier",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Routed To",
+   "options": "Proposed\nPending Review\nNeeds Info"
+  },
+  {
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model"
+  },
+  {
+   "description": "Which prompt produced this. Keeps a decision explainable after the prompt changes.",
+   "fieldname": "prompt_version",
+   "fieldtype": "Data",
+   "label": "Prompt Version"
+  },
+  {
+   "fieldname": "reasoning_section",
+   "fieldtype": "Section Break",
+   "label": "Reasoning"
+  },
+  {
+   "fieldname": "rationale",
+   "fieldtype": "Small Text",
+   "label": "Rationale"
+  },
+  {
+   "fieldname": "review_reason",
+   "fieldtype": "Small Text",
+   "label": "Review Reason"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "raw_response",
+   "fieldtype": "Code",
+   "label": "Raw Provider Response",
+   "options": "JSON"
+  },
+  {
+   "fieldname": "second_opinion_section",
+   "fieldtype": "Section Break",
+   "label": "Model Second Opinion",
+   "description": "What the model said about a row a rule already decided. Recorded, never acted on."
+  },
+  {
+   "fieldname": "shadow_account",
+   "fieldtype": "Link",
+   "label": "Model Would Have Picked",
+   "options": "Account"
+  },
+  {
+   "fieldname": "shadow_account_key",
+   "fieldtype": "Data",
+   "label": "Model Account Key"
+  },
+  {
+   "fieldname": "column_break_shadow",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "shadow_confidence",
+   "fieldtype": "Float",
+   "label": "Model Confidence",
+   "precision": "2"
+  },
+  {
+   "fieldname": "model_disagreed",
+   "fieldtype": "Check",
+   "default": "0",
+   "in_standard_filter": 1,
+   "label": "Model Disagreed",
+   "description": "A rule the model keeps disagreeing with is either stale or the model is miscalibrated. Either way somebody should look."
+  },
+  {
+   "fieldname": "shadow_rationale",
+   "fieldtype": "Small Text",
+   "label": "Model Rationale"
+  },
+  {
+   "fieldname": "outcome_section",
+   "fieldtype": "Section Break",
+   "label": "What The Human Decided"
+  },
+  {
+   "fieldname": "human_decision",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Human Decision",
+   "options": "\npending\napproved\noverridden\nrejected\nneeds_info"
+  },
+  {
+   "fieldname": "final_account",
+   "fieldtype": "Link",
+   "label": "Final Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "column_break_outcome",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "description": "Set when the account that posted differs from the account the AI proposed.",
+   "fieldname": "was_overridden",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Was Overridden"
+  },
+  {
+   "fieldname": "journal_entry",
+   "fieldtype": "Link",
+   "label": "Journal Entry",
+   "options": "Journal Entry"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-14 09:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "AI Bookkeeper",
+ "name": "AI Categorization Log",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Auditor",
+   "share": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
