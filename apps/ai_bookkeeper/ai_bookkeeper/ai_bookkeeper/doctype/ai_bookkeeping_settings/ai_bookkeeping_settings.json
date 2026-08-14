@@ -1,0 +1,150 @@
+{
+ "actions": [],
+ "creation": "2026-08-14 09:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "provider_section",
+  "enable_llm",
+  "provider",
+  "model",
+  "column_break_provider",
+  "effort",
+  "anthropic_api_key",
+  "api_key_status",
+  "routing_section",
+  "confidence_threshold",
+  "column_break_routing",
+  "post_needs_info_to_suspense",
+  "company_section",
+  "default_company",
+  "bank_account"
+ ],
+ "fields": [
+  {
+   "fieldname": "provider_section",
+   "fieldtype": "Section Break",
+   "label": "AI Provider"
+  },
+  {
+   "default": "1",
+   "description": "When off, only deterministic rules run and everything else routes to review.",
+   "fieldname": "enable_llm",
+   "fieldtype": "Check",
+   "label": "Enable AI Step"
+  },
+  {
+   "default": "mock",
+   "description": "'mock' is a deterministic offline provider. It needs no key and no network.",
+   "fieldname": "provider",
+   "fieldtype": "Select",
+   "label": "Provider",
+   "options": "mock\nanthropic",
+   "reqd": 1
+  },
+  {
+   "default": "claude-opus-5",
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model",
+   "depends_on": "eval:doc.provider !== \"mock\""
+  },
+  {
+   "fieldname": "column_break_provider",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "low",
+   "description": "Reasoning depth. Classification does not need much.",
+   "fieldname": "effort",
+   "fieldtype": "Select",
+   "label": "Effort",
+   "options": "low\nmedium\nhigh",
+   "depends_on": "eval:doc.provider !== \"mock\""
+  },
+  {
+   "fieldname": "anthropic_api_key",
+   "fieldtype": "Password",
+   "label": "Anthropic API Key",
+   "depends_on": "eval:doc.provider === \"anthropic\"",
+   "description": "Optional. site_config.json takes precedence when set. Stored encrypted in Frappe's __Auth table, not in this DocType's own table -- so it is not present in a fixtures export or a doctype-level backup dump."
+  },
+  {
+   "description": "Checked live when you change Provider. The key itself lives in site_config.json as anthropic_api_key and is never stored here.",
+   "fieldname": "api_key_status",
+   "fieldtype": "Data",
+   "label": "API Key Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "routing_section",
+   "fieldtype": "Section Break",
+   "label": "Routing Policy"
+  },
+  {
+   "default": "0.7",
+   "description": "Model proposals below this confidence go to a human. Policy knob, not a constant.",
+   "fieldname": "confidence_threshold",
+   "fieldtype": "Float",
+   "label": "Confidence Threshold",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_routing",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "description": "Off by default. When on, blocked rows still get a draft against Suspense so bank reconciliation stays balanced. They remain unpostable either way.",
+   "fieldname": "post_needs_info_to_suspense",
+   "fieldtype": "Check",
+   "label": "Create Suspense Draft For Needs Info"
+  },
+  {
+   "fieldname": "company_section",
+   "fieldtype": "Section Break",
+   "label": "Company"
+  },
+  {
+   "fieldname": "default_company",
+   "fieldtype": "Link",
+   "label": "Default Company",
+   "options": "Company"
+  },
+  {
+   "description": "The account this bank statement belongs to.",
+   "fieldname": "bank_account",
+   "fieldtype": "Link",
+   "label": "Bank Account",
+   "options": "Account"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-08-14 09:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "AI Bookkeeper",
+ "name": "AI Bookkeeping Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Accounts User"
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

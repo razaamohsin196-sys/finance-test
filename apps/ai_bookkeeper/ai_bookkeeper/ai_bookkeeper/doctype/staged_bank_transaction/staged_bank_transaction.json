@@ -1,0 +1,257 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "format:SBT-{YYYY}-{#####}",
+ "creation": "2026-08-14 09:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "txn_section",
+  "txn_date",
+  "description",
+  "column_break_txn",
+  "amount",
+  "currency",
+  "direction",
+  "source_section",
+  "account_hint",
+  "source_file",
+  "column_break_source",
+  "dedupe_hash",
+  "company",
+  "proposal_section",
+  "workflow_state",
+  "proposed_account",
+  "proposed_account_key",
+  "column_break_proposal",
+  "confidence",
+  "ai_source",
+  "ai_model",
+  "rationale_section",
+  "rationale",
+  "review_reason",
+  "categorization_error",
+  "posting_section",
+  "journal_entry"
+ ],
+ "fields": [
+  {
+   "fieldname": "txn_section",
+   "fieldtype": "Section Break",
+   "label": "Transaction"
+  },
+  {
+   "fieldname": "txn_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_txn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount",
+   "options": "currency",
+   "reqd": 1
+  },
+  {
+   "default": "USD",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency",
+   "reqd": 1
+  },
+  {
+   "fieldname": "direction",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Direction",
+   "options": "debit\ncredit",
+   "reqd": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "source_section",
+   "fieldtype": "Section Break",
+   "label": "Source"
+  },
+  {
+   "description": "Advisory only. Never overrides a rule.",
+   "fieldname": "account_hint",
+   "fieldtype": "Data",
+   "label": "Account Hint"
+  },
+  {
+   "fieldname": "source_file",
+   "fieldtype": "Data",
+   "label": "Source File",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_source",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Identity of the row. Makes re-importing the same statement a no-op.",
+   "fieldname": "dedupe_hash",
+   "fieldtype": "Data",
+   "label": "Dedupe Hash",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "proposal_section",
+   "fieldtype": "Section Break",
+   "label": "Proposal"
+  },
+  {
+   "default": "Imported",
+   "fieldname": "workflow_state",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Imported\nAI Proposed\nPending Review\nNeeds Info\nApproved\nPosted\nRejected",
+   "read_only": 1
+  },
+  {
+   "fieldname": "proposed_account",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Proposed Account",
+   "options": "Account",
+   "read_only": 1
+  },
+  {
+   "description": "Logical account key chosen from the closed vocabulary.",
+   "fieldname": "proposed_account_key",
+   "fieldtype": "Data",
+   "label": "Proposed Account Key",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_proposal",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "confidence",
+   "fieldtype": "Float",
+   "label": "Confidence",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "description": "rule = deterministic match, llm = model proposal, fallback = model unavailable.",
+   "fieldname": "ai_source",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Proposed By",
+   "options": "\nrule\nllm\nfallback",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ai_model",
+   "fieldtype": "Data",
+   "label": "Model",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rationale_section",
+   "fieldtype": "Section Break",
+   "label": "Reasoning"
+  },
+  {
+   "fieldname": "rationale",
+   "fieldtype": "Small Text",
+   "label": "Rationale",
+   "read_only": 1
+  },
+  {
+   "depends_on": "review_reason",
+   "fieldname": "review_reason",
+   "fieldtype": "Small Text",
+   "label": "Why This Needs A Human",
+   "read_only": 1
+  },
+  {
+   "depends_on": "categorization_error",
+   "fieldname": "categorization_error",
+   "fieldtype": "Small Text",
+   "label": "Categorisation Error",
+   "read_only": 1
+  },
+  {
+   "fieldname": "posting_section",
+   "fieldtype": "Section Break",
+   "label": "Posting"
+  },
+  {
+   "description": "Draft journal entry awaiting human submission. Empty for Needs Info.",
+   "fieldname": "journal_entry",
+   "fieldtype": "Link",
+   "label": "Journal Entry",
+   "options": "Journal Entry",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-14 09:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "AI Bookkeeper",
+ "name": "Staged Bank Transaction",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "txn_date",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

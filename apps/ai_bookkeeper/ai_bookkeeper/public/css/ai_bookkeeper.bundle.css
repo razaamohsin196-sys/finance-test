@@ -1,0 +1,70 @@
+/* Desk polish for ai_bookkeeper.
+ *
+ * Scope: every rule here is gated on `body[data-route]` matching one of this
+ * app's DocTypes. The stylesheet is loaded desk-wide (app_include_css), but
+ * nothing in it applies outside our own pages -- a custom app should not
+ * quietly restyle the rest of somebody's ERPNext. Frappe rewrites data-route
+ * on every SPA navigation, so the scoping follows the user around.
+ */
+
+/* ---------------------------------------------------------------------------
+ * Smooth sidebar collapse.
+ *
+ * Frappe toggles the sidebar with jQuery .toggle(), which writes
+ * `display: none` inline. `display` is a discrete property and cannot tween,
+ * which is why the sidebar snaps -- and why adding a transition-duration on
+ * its own does nothing at all. `allow-discrete` holds the display flip until
+ * the rest of the transition finishes, so opacity and transform can play.
+ *
+ * Degrades cleanly: where `allow-discrete` is unsupported this is the stock
+ * instant toggle again, with no layout difference.
+ * ------------------------------------------------------------------------ */
+body[data-route*="Staged Bank Transaction"] .layout-side-section,
+body[data-route*="AI Categorization Log"] .layout-side-section,
+body[data-route*="Vendor Account Rule"] .layout-side-section,
+body[data-route*="AI Bookkeeping Settings"] .layout-side-section {
+	transition:
+		opacity 160ms ease,
+		transform 160ms ease,
+		display 160ms allow-discrete;
+}
+
+/* jQuery writes exactly `display: none;`, which this matches. Gives the hidden
+ * state something to transition *to*; without it opacity never changes and
+ * allow-discrete has nothing to wait for. */
+body[data-route*="Staged Bank Transaction"] .layout-side-section[style*="display: none"],
+body[data-route*="AI Categorization Log"] .layout-side-section[style*="display: none"],
+body[data-route*="Vendor Account Rule"] .layout-side-section[style*="display: none"],
+body[data-route*="AI Bookkeeping Settings"] .layout-side-section[style*="display: none"] {
+	opacity: 0;
+	transform: translateX(-6px);
+}
+
+/* The expand direction needs an explicit starting point, or it pops in at
+ * full opacity. */
+@starting-style {
+	body[data-route*="Staged Bank Transaction"] .layout-side-section,
+	body[data-route*="AI Categorization Log"] .layout-side-section,
+	body[data-route*="Vendor Account Rule"] .layout-side-section,
+	body[data-route*="AI Bookkeeping Settings"] .layout-side-section {
+		opacity: 0;
+		transform: translateX(-6px);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	body[data-route*="Staged Bank Transaction"] .layout-side-section,
+	body[data-route*="AI Categorization Log"] .layout-side-section,
+	body[data-route*="Vendor Account Rule"] .layout-side-section,
+	body[data-route*="AI Bookkeeping Settings"] .layout-side-section {
+		transition: none;
+	}
+}
+
+/* ---------------------------------------------------------------------------
+ * Review-queue legibility. The state is what a reviewer scans for, so it
+ * should not be the quietest text on the row.
+ * ------------------------------------------------------------------------ */
+body[data-route*="Staged Bank Transaction"] .list-row-col .indicator-pill {
+	font-weight: 500;
+}

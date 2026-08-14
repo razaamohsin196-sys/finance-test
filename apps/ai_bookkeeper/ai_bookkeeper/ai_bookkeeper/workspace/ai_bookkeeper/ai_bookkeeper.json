@@ -1,0 +1,95 @@
+{
+ "charts": [],
+ "content": "[\n {\n  \"data\": {\n   \"col\": 12,\n   \"text\": \"<span class=\\\"h4\\\"><b>Needs your attention</b></span>\"\n  },\n  \"id\": \"hdr1\",\n  \"type\": \"header\"\n },\n {\n  \"data\": {\n   \"col\": 4,\n   \"shortcut_name\": \"Review Queue\"\n  },\n  \"id\": \"sc1\",\n  \"type\": \"shortcut\"\n },\n {\n  \"data\": {\n   \"col\": 4,\n   \"shortcut_name\": \"Needs Info\"\n  },\n  \"id\": \"sc2\",\n  \"type\": \"shortcut\"\n },\n {\n  \"data\": {\n   \"col\": 4,\n   \"shortcut_name\": \"All Transactions\"\n  },\n  \"id\": \"sc3\",\n  \"type\": \"shortcut\"\n },\n {\n  \"data\": {\n   \"col\": 12\n  },\n  \"id\": \"sp1\",\n  \"type\": \"spacer\"\n },\n {\n  \"data\": {\n   \"col\": 12,\n   \"text\": \"<span class=\\\"h4\\\"><b>Trail and configuration</b></span>\"\n  },\n  \"id\": \"hdr2\",\n  \"type\": \"header\"\n },\n {\n  \"data\": {\n   \"col\": 4,\n   \"shortcut_name\": \"Audit Log\"\n  },\n  \"id\": \"sc4\",\n  \"type\": \"shortcut\"\n },\n {\n  \"data\": {\n   \"col\": 4,\n   \"shortcut_name\": \"Settings\"\n  },\n  \"id\": \"sc5\",\n  \"type\": \"shortcut\"\n },\n {\n  \"data\": {\n   \"card_name\": \"Reference\",\n   \"col\": 4\n  },\n  \"id\": \"cd1\",\n  \"type\": \"card\"\n }\n]",
+ "creation": "2026-08-14 23:38:41.979495",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "hide_custom": 0,
+ "icon": "review",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "AI Bookkeeper",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reference",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Vendor Account Rule",
+   "link_count": 0,
+   "link_to": "Vendor Account Rule",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Journal Entry",
+   "link_count": 0,
+   "link_to": "Journal Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-08-14 23:38:41.979495",
+ "modified_by": "Administrator",
+ "module": "AI Bookkeeper",
+ "name": "AI Bookkeeper",
+ "number_cards": [],
+ "owner": "Administrator",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 1.0,
+ "shortcuts": [
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "label": "Review Queue",
+   "link_to": "Staged Bank Transaction",
+   "stats_filter": "{\n \"workflow_state\": \"Pending Review\"\n}",
+   "type": "DocType"
+  },
+  {
+   "color": "Red",
+   "doc_view": "List",
+   "label": "Needs Info",
+   "link_to": "Staged Bank Transaction",
+   "stats_filter": "{\n \"workflow_state\": \"Needs Info\"\n}",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "All Transactions",
+   "link_to": "Staged Bank Transaction",
+   "type": "DocType"
+  },
+  {
+   "color": "Blue",
+   "doc_view": "List",
+   "label": "Audit Log",
+   "link_to": "AI Categorization Log",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "label": "Settings",
+   "link_to": "AI Bookkeeping Settings",
+   "type": "DocType"
+  }
+ ],
+ "title": "AI Bookkeeper"
+}

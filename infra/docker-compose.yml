@@ -1,0 +1,51 @@
+# A Frappe/ERPNext v15 development bench.
+#
+# Uses the official bench dev image rather than the production erpnext image so
+# a custom app can be developed against a live bench. `infra/bootstrap.sh`
+# drives the rest: bench init, site creation, erpnext, and this app.
+#
+# The bench itself lives inside the container at /home/frappe/bench (fast local
+# filesystem, not a bind mount). The app is symlinked in from /workspace, so
+# edits in the repo are live. Removing the frappe container discards the bench
+# -- rerun bootstrap.sh to rebuild it.
+services:
+  mariadb:
+    image: docker.io/mariadb:11.8
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MARIADB_AUTO_UPGRADE: 1
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 40
+
+  redis-cache:
+    image: docker.io/redis:alpine
+
+  redis-queue:
+    image: docker.io/redis:alpine
+
+  frappe:
+    image: docker.io/frappe/bench:latest
+    command: sleep infinity
+    environment:
+      - SHELL=/bin/bash
+    volumes:
+      - ../:/workspace:cached
+    working_dir: /workspace
+    ports:
+      - "8000:8000"   # bench serve
+      - "9000:9000"   # socketio
+    depends_on:
+      mariadb:
+        condition: service_healthy
+
+volumes:
+  mariadb-data:
