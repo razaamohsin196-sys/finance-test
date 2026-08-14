@@ -1,0 +1,31 @@
+[project]
+name = "ai_bookkeeper"
+authors = [{ name = "Mohsin", email = "razaamohsin196@gmail.com" }]
+description = "AI-assisted transaction categorisation for ERPNext, with a human approval layer."
+requires-python = ">=3.10"
+readme = "README.md"
+dynamic = ["version"]
+dependencies = []
+
+[project.optional-dependencies]
+# The Anthropic SDK is optional on purpose: the app runs end to end against
+# the offline MockProvider without it.
+anthropic = ["anthropic>=0.40"]
+
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.bench.dev-dependencies]
+# none
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "I", "UP", "B"]
+ignore = ["E501", "B905"]
+
+[tool.pytest.ini_options]
+testpaths = ["ai_bookkeeper/tests"]

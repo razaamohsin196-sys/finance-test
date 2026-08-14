@@ -1,0 +1,120 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "field:rule_name",
+ "creation": "2026-08-14 09:00:00.000000",
+ "description": "Deterministic pattern-to-account mappings. Editable by a bookkeeper without a deploy.",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "rule_name",
+  "enabled",
+  "priority",
+  "column_break_1",
+  "pattern",
+  "account_key",
+  "match_section",
+  "force_review",
+  "review_reason",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "rule_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Rule Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Enabled"
+  },
+  {
+   "default": "100",
+   "description": "Lower runs first.",
+   "fieldname": "priority",
+   "fieldtype": "Int",
+   "label": "Priority"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Case-insensitive regular expression matched against the description.",
+   "fieldname": "pattern",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Pattern",
+   "reqd": 1
+  },
+  {
+   "description": "Logical account key, e.g. CLOUD_HOSTING.",
+   "fieldname": "account_key",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Account Key",
+   "reqd": 1
+  },
+  {
+   "fieldname": "match_section",
+   "fieldtype": "Section Break",
+   "label": "On Match"
+  },
+  {
+   "default": "0",
+   "description": "Match still proposes an account, but always stops for a human.",
+   "fieldname": "force_review",
+   "fieldtype": "Check",
+   "label": "Force Review"
+  },
+  {
+   "depends_on": "force_review",
+   "fieldname": "review_reason",
+   "fieldtype": "Small Text",
+   "label": "Review Reason"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-14 09:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "AI Bookkeeper",
+ "name": "Vendor Account Rule",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User"
+  }
+ ],
+ "sort_field": "priority",
+ "sort_order": "ASC",
+ "states": [],
+ "track_changes": 1
+}
